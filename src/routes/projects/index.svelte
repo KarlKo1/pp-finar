@@ -27,7 +27,7 @@
             console.log(users)
 
         let projectDiv = document.getElementById('projects')
-        projectDiv.innerHTML = "Not logged in";
+        projectDiv.innerHTML = "soon TM";
     });
 </script>
 
@@ -56,7 +56,7 @@
                     <ul class="nav nav-pills outline-active">
                         {#if $session.user}
                             <li class="nav-item">
-                                Welcome
+                                Welcome?
                             </li>
                         {:else}
                             <li class="nav-item">

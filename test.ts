@@ -1,7 +1,23 @@
+// @ts-ignore
+import prisma from "$lib/prisma";
 
-let yeet = "asdfe"
-let yeeter = Buffer.from(yeet, "utf-8")
 
-console.dir(yeeter)
+const main = async () => {
+    const userEmail = "asdfe@asdfe.com"
 
-export {}
+    // @ts-ignore
+    return await prisma.users.findFirst({
+        select: {
+            email: true,
+            name: true,
+            password: true,
+            token: true,
+        },
+        where: {
+            email: `${userEmail}`
+        }
+    });
+}
+
+// @ts-ignore
+await main()

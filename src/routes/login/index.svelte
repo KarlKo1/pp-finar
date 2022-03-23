@@ -1,49 +1,55 @@
-<!--<script context="module">-->
-<!--    export async function load({session}) {-->
-
-<!--        const auth = await fetch('/api/brr')-->
-<!--        auth.then(res =>console.log( res.json()))-->
-
-<!--        return "yes";-->
-<!--    }-->
-<!--</script>-->
+<script context="module">
+    export async function load({session}) {
+        if (session.user) {
+            return {
+                status: 302,
+                redirect: '/'
+            };
+        }
+        return {};
+    }
+</script>
 
 <script>
     import {session} from '$app/stores';
     import {goto} from '$app/navigation';
-    // import {post} from '$lib/utils.ts';
+    import {post} from '$lib/utils';
     import ListErrors from '$lib/ListErrors.svelte';
-    // import * as api from '$lib/_api'
+    import {onMount} from "svelte";
 
-    let email;
-    let password;
+    let email = '';
+    let password = '';
     let errors = null;
-    // let sentData;
 
-    async function submit() {
-        // sentData = {
-        //     email: `${email}`,
-        //     password: `${password}`
-        // }
-        // console.log(`Sent data: ${JSON.stringify(sentData)}`)
+    async function submit(event) {
+        const loginBtn = document.getElementById('loginBtn')
+        loginBtn.disabled = true;
 
-        await fetch('/api/auth', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: `${email}`,
-                password: `${password}`
-            })
+        const response = await post(`auth/login`, {
+            email,
+            password
         })
-        .then(res => {
-            if(res.status === 202) {
-                alert("Very logged in")
-            }
-            if(res.status === 401) {
-                alert("Very wrong credentials")
-            }
-        })
+            .finally(() => {
+                loginBtn.disabled = false;
+            });
+
+        // TODO handle network errors
+        errors = response.errors;
+
+        if (response.user) {
+            $session.user = response.user;
+            goto('/');
+        }
     }
+
+
+    onMount(() => {
+        const profileBtn = document.getElementById('gotoProfile')
+
+        profileBtn.addEventListener('click', () => {
+            location.href = '/profile'
+        })
+    })
 </script>
 
 <svelte:head>
@@ -70,10 +76,13 @@
                         <input class="form-control form-control-lg" type="password" required placeholder="Password"
                                bind:value={password}>
                     </fieldset>
-                    <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
+                    <button id="loginBtn" class="btn btn-lg btn-primary pull-xs-right" type="submit">
                         Sign in
                     </button>
                 </form>
+                <button id="gotoProfile" class="btn btn-lg btn-primary pull-xs-right" type="button">
+                    Profile
+                </button>
             </div>
         </div>
     </div>

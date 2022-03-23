@@ -1,14 +1,21 @@
-import * as api from '$lib/_api';
-import { respond } from './_respond';
+// const bcrypt = require('bcrypt');
+// import * as bcrypt from 'bcrypt'
+import * as api from '$lib/api';
+import {respond} from './_respond';
 
-export async function post({ request }) {
-	const json = await request.json();
-	const body = await api.post('users/login', {
-		user: {
-			email: json.email,
-			password: json.password
-		}
-	});
+export const post = async ({request}) => {
+    console.log("file: auth/login.ts")
 
-	return respond(body);
+    const json = await request.json();
+    const body = await api.post('login', {
+        user: {
+            email: json.email,
+            password: json.password
+        }
+    });
+
+    console.log("--- login.ts post caught: ---")
+    console.log(body)
+
+    return respond(body);
 }

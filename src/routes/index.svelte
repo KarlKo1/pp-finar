@@ -1,7 +1,8 @@
 <script context="module">
 
-    export async function load({url, fetch}) {
-
+    export async function load({url, fetch, session}) {
+        console.dir("--- root index session ---")
+        console.dir(session)
 
         return {
 
@@ -39,8 +40,7 @@
     {#if !$session.user}
         <div class="banner">
             <div class="container">
-                <h1 class="logo-font">conduit</h1>
-                <p>A place to share your knowledge.</p>
+                <h1 class="logo-font">if not session user</h1>
             </div>
         </div>
     {/if}
@@ -56,11 +56,11 @@
                     <ul class="nav nav-pills outline-active">
                         {#if $session.user}
                             <li class="nav-item">
-                                Your Feed
+                                wow you logged in poggers
                             </li>
                         {:else}
                             <li class="nav-item">
-                                <a href="/login" rel="prefetch" class="nav-link">Sign in</a>
+                                <a href="/login" rel="prefetch" class="nav-link">Do the in logging</a>
                             </li>
                         {/if}
 

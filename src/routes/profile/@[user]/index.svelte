@@ -1,13 +1,15 @@
 <script context="module">
-    import { create_load } from './_load.ts';
-    export const load = create_load('projects');
-    console.log("user")
+    export function create_load(endpoint) {
+        // this used to be for article loading on profiles
+
+        return {
+            props: "yes"
+        };
+    }
 </script>
 
 <script>
-    console.log("user2")
-
-    export let projects;
 </script>
 
-<p>Welcome</p>
+<p>@user/index.svelte</p>
+<p>gordon freeman</p>
