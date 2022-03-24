@@ -7,7 +7,7 @@
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build --verbose",
 		"preview": "svelte-kit preview",
-		"dbTest": "node --loader ts-node/esm ./src/test.ts"
+		"dbTest": "node --loader ts-node/esm ./test.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "next",

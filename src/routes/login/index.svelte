@@ -6,6 +6,7 @@
                 redirect: '/'
             };
         }
+
         return {};
     }
 </script>

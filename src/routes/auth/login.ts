@@ -1,5 +1,3 @@
-// const bcrypt = require('bcrypt');
-// import * as bcrypt from 'bcrypt'
 import * as api from '$lib/api';
 import {respond} from './_respond';
 

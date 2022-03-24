@@ -1,8 +1,10 @@
 export function respond(body) {
 	console.log("file: auth/_respond.ts")
-	//
-	// // force fake stop
-	// return { status: 401, body };
+
+	//  TODO: Remove. added for dynamic api testing
+	console.log("--- _respond.ts Force stop ---")
+	// force fake stop
+	return { status: 401, body };
 
 
 	if (body.errors) {

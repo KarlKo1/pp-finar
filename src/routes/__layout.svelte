@@ -2,14 +2,15 @@
     export async function load({url, fetch, session}) {
         const {user} = session;
 
-        if (url.pathname !== '/login') {
-            if (!user) {
-                return {
-                    status: 302,
-                    redirect: '/login'
-                };
-            }
-        }
+        //  TODO: uncomment this. commented for dynamic api testing
+        // if (url.pathname !== '/login') {
+        //     if (!user) {
+        //         return {
+        //             status: 302,
+        //             redirect: '/login'
+        //         };
+        //     }
+        // }
 
         return "what do i put here";
     }
