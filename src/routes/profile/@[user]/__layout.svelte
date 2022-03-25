@@ -1,12 +1,12 @@
 <script context="module">
     export async function load({params, fetch}) {
         // can be used for getting 'profile info' form DB
-        // const res = await fetch(`/profile/@${params.user}.json`);
-
+        const res = await fetch(`/profile/@${params.user}.json`);
+        // const prof = await res.json()
         return {
             props: {
-                // profile: await res.json()
-                profile: params.user
+                profile: await res.json()
+                // profile: prof
             }
         }
     }
@@ -50,16 +50,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-10 offset-md-1">
-                    <img src={profile.image} class="user-img" alt={profile.username}/>
-                    <!--                    <h4>{profile.username}</h4>-->
-                    <h4>{profile}</h4>
+                    <!--                    <img src={profile.image} class="user-img" alt={profile.username}/>-->
+                    <h4>{profile.username}</h4>
+                    <p>{profile.bio}</p>
 
-                    {#if is_user}
-                        <a href="/settings" class="btn btn-sm btn-outline-secondary action-btn">
-                            <i class="ion-gear-a"/>
-                            Edit Profile Settings
-                        </a>
-                    {/if}
+                    <!--{#if is_user}-->
+                    <!--    <a href="/settings" class="btn btn-sm btn-outline-secondary action-btn">-->
+                    <!--        <i class="ion-gear-a"/>-->
+                    <!--        Edit Profile Settings-->
+                    <!--    </a>-->
+                    <!--{/if}-->
                 </div>
             </div>
         </div>
@@ -68,7 +68,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-10 offset-md-1">
-                <!--                this is @[user]/index.svelte-->
+                @[user]/_layout.svelte
+                <!--                                this is @[user]/index.svelte-->
                 <slot/>
             </div>
         </div>

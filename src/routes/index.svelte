@@ -1,8 +1,8 @@
 <script context="module">
 
     export async function load({url, fetch, session}) {
-        console.dir("--- root index session ---")
-        console.dir(session)
+        // console.dir("--- root index session ---")
+        // console.dir(session)
 
         return {
 

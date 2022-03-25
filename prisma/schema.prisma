@@ -13856,12 +13856,11 @@ model WRTSDL7_500_15 {
 }
 
 model Users {
-  id                Int       @id(map: "Users_pk") @default(autoincrement())
-  name              String?   @db.VarChar(11)
-  email             String?   @unique(map: "Users_email_uindex") @db.VarChar(50)
-  password          String?   @db.VarChar(50)
-  cookie            String?   @db.VarChar(255)
-  cookie_expiration DateTime? @db.Date
+  id       Int     @id(map: "Users_pk") @default(autoincrement())
+  username String? @db.VarChar(55)
+  email    String? @unique(map: "Users_email_uindex") @db.VarChar(50)
+  password String? @db.VarChar(50)
+  bio      String? @db.VarChar(255)
 }
 
 model Session {

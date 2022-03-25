@@ -12,6 +12,7 @@ export function getSession({ locals }) {
 		user: locals.user && {
 			username: locals.user.username,
 			email: locals.user.email,
+			bio: locals.user.bio
 		}
 	};
 }

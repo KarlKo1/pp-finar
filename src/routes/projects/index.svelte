@@ -24,7 +24,7 @@
     export let users;
 
     onMount(async () => {
-            console.log(users)
+            // console.log(users)
 
         let projectDiv = document.getElementById('projects')
         projectDiv.innerHTML = "soon TM";

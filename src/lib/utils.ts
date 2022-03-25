@@ -10,20 +10,3 @@ export function post(endpoint, data) {
         }
     }).then((r) => r.json());
 }
-
-// await fetch('/auth/login', {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json'},
-//     body: JSON.stringify({
-//         email: `${email}`,
-//         password: `${password}`
-//     })
-// })
-//     .then(res => {
-//         if (res.status === 202) {
-//             alert("Very logged in")
-//         }
-//         if (res.status === 401) {
-//             alert("Very wrong credentials")
-//         }
-//     })
