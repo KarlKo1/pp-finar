@@ -3,7 +3,8 @@
 		"baseUrl": ".",
 		"paths": {
 			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"]
+			"$lib/*": ["src/lib/*"],
+
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte", "src/hooks/index.ts", "src/routes/article/index.json.ts", "src/routes/auth/save.ts", "src/routes/auth/register.ts", "src/routes/auth/logout.ts", "src/routes/auth/login.ts", "src/routes/auth/_respond.ts", "src/routes/tags.json.ts",

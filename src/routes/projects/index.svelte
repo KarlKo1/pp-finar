@@ -1,73 +1,82 @@
-<!--<script context="module">-->
-<!--    export async function load({url, fetch}) {-->
-<!--        const projects = await fetch('/projects/getUsers.json')-->
-<!--        // const projects = await fetch('/projects/test.json')-->
-<!--        const {users} = await projects.json()-->
+<script context="module">
+    export async function load({ url, fetch }) {
+        const res = await fetch(`/projects.json`);
+        // const projects = await fetch('/projects/test.json')
 
-<!--        setTimeout(() => {-->
-<!--            console.log(users)-->
-<!--        }, 1000)-->
-
-<!--        return {-->
-<!--            props: {-->
-<!--                users-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
+        return {
+            props: {
+                projects: await res.json(),
+                // profile: prof
+            },
+        };
+    }
+</script>
 
 <script>
-    import {onMount} from 'svelte';
-    import {page, session} from '$app/stores';
+    import { onMount } from "svelte";
+    import { page, session } from "$app/stores";
     // import Pagination from '$lib/Pagination.svelte';
+    let promise;
+    let year = $page.params && $page.params.year ? $page.params.year : new Date().getFullYear();
+    export let projects;
 
-    export let users;
 
     onMount(async () => {
-            // console.log(users)
+        const projectDiv = document.getElementById("projects");
+        projectDiv.innerHTML = "";
 
-        let projectDiv = document.getElementById('projects')
-        projectDiv.innerHTML = "soon TM";
+        for (const project of projects) {
+            // projectDiv.innerHTML += project
+        }
     });
+
+    $:selectedYear = $page.params && $page.params.year ? $page.params.year : new Date().getFullYear();
 </script>
 
 <svelte:head>
-    <title>Conduit</title>
+    <title>brr</title>
 </svelte:head>
 
 <div class="home-page">
-    {#if !$session.user}
-        <div class="banner">
-            <div class="container">
-                <h1 class="logo-font">conduit</h1>
-                <p>A place to share your knowledge.</p>
-            </div>
-        </div>
-    {/if}
-
-    <div id="projects">
-        Loading...
-    </div>
-
+    <!--{#if !$session.user}-->
+    <!--    <div class="banner">-->
+    <!--        <div class="container">-->
+    <!--            <h1 class="logo-font">conduit</h1>-->
+    <!--            <p>A place to share your knowledge.</p>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--{/if}-->
+    <h5 class="p-3">{("projects")}</h5>
+    <table class="text-left border shadow">
+        <thead class="bg-primary-800 text-white">
+        <tr>
+            <th class="p-1 border">#</th>
+            <th class="p-1 border">{('foremanName')}</th>
+            <th class="p-1 border">{('budget')}</th>
+            <th class="p-1 border">{('Finar')}</th>
+            <th class="p-1 border">{('profit')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {#each projects as project,i}
+                    <tr>
+                        <td class="p-1 border">{i+1}</td>
+                        <td class="p-1 border">{project.NAME}</td>
+                        <td class="p-1 border">
+                            <a class="text-primary-800"
+                               href="projects/{project['projectId']}/budget?year={selectedYear}"> {project["projectName"]}</a>
+                        </td>
+                        <td class="p-1 border">
+                            <a class="text-primary-800"
+                               href="projects/{project['projectId']}?year={selectedYear}"> {project["projectName"]}</a>
+                        </td>
+                        <td class="p-1 border text-right {project['profit'] < 0 ? 'text-error-800' : ''}">{project["profit"]}</td>
+                    </tr>
+        {/each}
+    </tbody>
     <div class="container page">
         <div class="row">
-            <div class="col-md-9">
-                <div class="feed-toggle">
-                    <ul class="nav nav-pills outline-active">
-                        {#if $session.user}
-                            <li class="nav-item">
-                                Welcome?
-                            </li>
-                        {:else}
-                            <li class="nav-item">
-                                <a href="/login" rel="prefetch" class="nav-link">Sign in</a>
-                            </li>
-                        {/if}
-
-                    </ul>
-                </div>
-
-            </div>
+            <div id="projects">Loading...</div>
         </div>
     </div>
 </div>

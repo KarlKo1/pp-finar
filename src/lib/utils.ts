@@ -10,3 +10,12 @@ export function post(endpoint, data) {
         }
     }).then((r) => r.json());
 }
+
+export function availableYears() {
+    let thisYear = new Date().getFullYear()
+    let years = []
+    for (let y = 2011; y <= thisYear; y++) {
+        years.push(y)
+    }
+    return years
+}
