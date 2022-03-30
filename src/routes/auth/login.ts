@@ -1,8 +1,9 @@
 import * as api from '$lib/api';
 import {respond} from './_respond';
+import {logger} from "$lib/logger";
 
 export const post = async ({request}) => {
-    console.log(`\nfile: auth/login.ts`)
+    logger('debug', `file: auth/login.ts`)
     const json = await request.json();
     const body = await api.post('login', {
         sentData: json,
@@ -19,8 +20,8 @@ export const post = async ({request}) => {
         table: 'users'
     });
 
-    console.log(`\n--- login.ts post caught: ---`)
-    console.log(body)
+    logger('debug',`--- login.ts post caught: ---`)
+    logger('info',body)
 
     return respond(body);
 }

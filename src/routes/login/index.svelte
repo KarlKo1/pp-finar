@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-    <title>Sign in • Conduit</title>
+    <title>Sign in • Finar</title>
 </svelte:head>
 
 <div class="auth-page">

@@ -1,4 +1,6 @@
 <script context="module">
+    import {logger} from '$lib/logger'
+
     export function load({session, locals}) {
         const {user} = session;
 
@@ -36,6 +38,7 @@
     async function save() {
         in_progress = true;
 
+        logger('warn', user)
         const response = await post(`auth/save`, user);
 
         errors = response.errors;
@@ -46,7 +49,7 @@
 </script>
 
 <svelte:head>
-    <title>Settings • Conduit</title>
+    <title>Settings • Finar</title>
 </svelte:head>
 
 <div class="settings-page">

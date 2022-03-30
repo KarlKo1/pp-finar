@@ -29,7 +29,7 @@ export async function get({params, locals}) {
 
 
     console.log(`\n--- projects/index.json.ts returns: ---`)
-    console.log(projects[0].GRComment)
+    console.log(projects)
 
     return {
         body: projects

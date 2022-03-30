@@ -1,7 +1,8 @@
+import {logger} from '$lib/logger'
 import * as api from '$lib/api';
 
 export async function get({params, locals}) {
-    console.log(`\nfile: @user/index.json.ts`)
+    logger('debug', `file: @user/index.json.ts`)
 
     // console.log(`\n--- @user/index.json.ts params ---`)
     // console.log(params.user)
@@ -25,8 +26,8 @@ export async function get({params, locals}) {
     );
 
 
-    console.log(`\n--- index.json.ts returns: ---`)
-    console.log(profile)
+    logger('debug',`--- index.json.ts returns: ---`)
+    logger('info',profile)
 
     return {
         body: profile

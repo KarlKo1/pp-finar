@@ -41,8 +41,8 @@
 </script>
 
 <svelte:head>
-    <!--    <title>{profile.username} • Conduit</title>-->
-    <title>{profile} • Conduit</title>
+    <!--    <title>{profile.username} • Finar</title>-->
+    <title>{profile} • Finar</title>
 </svelte:head>
 
 <div class="profile-page">

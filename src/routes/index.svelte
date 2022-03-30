@@ -1,4 +1,5 @@
 <script context="module">
+    import {logger} from '$lib/logger'
 
     export async function load({url, fetch, session}) {
         // console.dir("--- root index session ---")
@@ -13,6 +14,7 @@
 <script>
     import {onMount} from 'svelte';
     import {page, session} from '$app/stores';
+    // import {logger} from '$lib/logger'
     // import Pagination from '$lib/Pagination.svelte';
 
     onMount(async () => {
@@ -33,7 +35,7 @@
 </script>
 
 <svelte:head>
-    <title>Conduit</title>
+    <title>Finar</title>
 </svelte:head>
 
 <div class="home-page">

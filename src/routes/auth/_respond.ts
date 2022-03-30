@@ -1,5 +1,7 @@
+import {logger} from "$lib/logger";
+
 export function respond(body) {
-	console.log(`\nfile: auth/_respond.ts`)
+	logger('debug', `file: auth/_respond.ts`)
 
 	//  TODO: Remove. added for dynamic api testing
 	// console.log("--- _respond.ts Force stop ---")
@@ -10,11 +12,12 @@ export function respond(body) {
 		return { status: 401, body };
 	}
 
-	const json = JSON.stringify(body.user);
+	// const json = JSON.stringify(body.user);
+	const json = JSON.stringify(body);
 	const value = Buffer.from(json).toString('base64');
 
-	console.log(`\n--- _respond.ts caught: ---`)
-	console.log(json)
+	logger('debug', `--- _respond.ts caught: ---`)
+	logger('info', json)
 
 	return {
 		headers: {

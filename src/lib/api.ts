@@ -1,12 +1,13 @@
 import prisma from '$lib/prisma'
+import {logger} from "./logger";
 
 function getHeaders(opts) {
-    return Object.entries(opts.headers).reduce((prev, [key, value]) => prev + key + ": " + value + "\n", '');
+    return Object.entries(opts.headers).reduce((prev, [key, value]) => prev + key + ": " + value + "", '');
 }
 
 async function send({method, path, data, token}) {
-    console.log(`\nfile: lib/api.ts`)
-    console.log(path)
+    logger('debug', `file: lib/api.ts`)
+    logger('info', `path: ${path}`)
 
     const opts = {method, headers: {}};
     let dbReturn: any;
@@ -29,8 +30,8 @@ async function send({method, path, data, token}) {
 
     const dbTable = data.table;
 
-    console.log(`\n--- api.ts work data: ---`)
-    console.log(data)
+    logger('debug', `--- api.ts work data: ---`)
+    logger('info', `${data}`)
 
     let criteria;
 
@@ -52,7 +53,8 @@ async function send({method, path, data, token}) {
     // has to come after select and where ifs, to replace with both in
     if (
         data.hasOwnProperty('where') &&
-        data.hasOwnProperty('select')) {
+        data.hasOwnProperty('select')
+    ) {
         criteria = {
             select: data.select,
             where: data.where
@@ -142,26 +144,26 @@ async function send({method, path, data, token}) {
         }
     }
 
-    console.log(`\n--- api.ts return: ---`)
-    console.log(dbReturn)
+    logger('debug', `--- api.ts return: ---`)
+    logger('info', `${dbReturn}`)
     return dbReturn
 }
 
 export function get(path, data, token) {
-    console.log(`\n--- api.ts GET ---`)
+    logger('debug', `--- api.ts GET ---`)
     // console.log(`--- GET path: ${path} ---`)
     return send({method: 'GET', path, data, token});
 }
 
 export function post(path, data, token?) {
-    console.log(`\n--- api.ts POST ---`)
+    logger('debug', `--- api.ts POST ---`)
     // console.log(`--- POST path: ${path} ---`)
     return send({method: 'POST', path, data, token});
 }
 
 export function put(path, data, token) {
-    console.log(`\n--- api.ts PUT ---`)
-    console.log(token)
+    logger('debug', `--- api.ts PUT ---`)
+    // logger('info', `${token}`)
     return send({method: 'PUT', path, data, token});
 }
 
@@ -184,7 +186,7 @@ export function put(path, data, token) {
 //     }
 //
 //     console.log(JSON.stringify(errJson))
-//     console.log("\n");
+//     console.log("");
 //     if (httpStatus.toString().charAt(0) !== '4') {
 //         console.trace()
 //     }

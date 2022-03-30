@@ -1,9 +1,10 @@
 // import * as api from '$lib/api.ts';
 import * as api from '$lib/api';
 import {respond} from './_respond';
+import {logger} from "$lib/logger";
 
 export async function post({request, locals}) {
-    console.log(`\nfile: auth/save.ts`)
+    logger('debug', `file: auth/save.ts`)
 
     if (!locals.user) {
         return {
@@ -13,21 +14,12 @@ export async function post({request, locals}) {
 
     const user = await request.json();
     const {token} = locals.user;
-    console.log(locals)
-    console.log(user)
-    // console.log(token)
-    // console.log({token})
+    // logger('warn',{token})
 
     const body = await api.put(
         'settings',
         {
             sentData: user,
-            // select: {
-            //     username: true,
-            //     email: true,
-            //     password: true,
-            //     bio: true,
-            // },
             where: {
                 email: user.email
             },
@@ -43,8 +35,8 @@ export async function post({request, locals}) {
         token
     );
 
-    console.log(`\n--- save.ts post caught: ---`)
-    console.log(body)
+    logger('debug',`--- save.ts post caught: ---`)
+    logger('info', body)
 
     return respond(body);
 }
